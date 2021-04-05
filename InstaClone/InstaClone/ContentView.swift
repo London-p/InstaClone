@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var store: Store
     @StateObject var vm: FollowingBodyModel = FollowingBodyModel()
-   // var comment: Comment
+  //  var comment: Comment
     
     var body: some View {
         
@@ -82,34 +82,34 @@ struct ContentView: View {
                         Image(systemName: "heart")
                     }
                     NavigationView{
-                        VStack{
-                            Text("London")
-                                .font(.system(size: 25))
-                                .bold()
-                            Image(systemName: "person.crop.circle")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 100)
-                                .foregroundColor(.gray)
-                                .padding(.top, 30)
-                                .padding(.trailing, 230)
-                            Spacer()
-                            
+                        ScrollView {
+                            VStack {
+                                ProfileHeaderView()
+                                ProfileMiddleView()
+                                
+                                
+                                
+                                
+                                Spacer()
+                            }
                         }
                         .navigationBarHidden(true)
                     }
+                    
                     .tabItem {
                         Image(systemName: "person")
+                    }
                     }
                 }
             }
         }
 
-    struct ContentView_Previews: PreviewProvider {
-       
-        static var previews: some View {
+   
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
             ContentView()
         }
     }
-}
+
 

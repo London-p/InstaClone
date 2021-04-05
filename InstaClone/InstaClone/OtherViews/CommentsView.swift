@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CommentsView: View {
-   // var comment: Comment
+  //  var comment: Comment
  
     var person: Person
     var body: some View {

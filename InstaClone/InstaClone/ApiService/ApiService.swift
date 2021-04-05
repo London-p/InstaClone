@@ -23,7 +23,7 @@ class ContentApi {
                         PersonApi.people[1], comments: [
                             CommentsApi.comments[1],
                             CommentsApi.comments[0],
-                            CommentsApi.comments[2],
+                            CommentsApi.comments[4],
     
     ]),
         
@@ -36,7 +36,7 @@ class ContentApi {
     ]),
         UserContent(image: "That guy", desc: "Isn't this cool", owner:
                         PersonApi.people[2], comments: [
-                            CommentsApi.comments[1],
+                            CommentsApi.comments[4],
                             CommentsApi.comments[0],
                             CommentsApi.comments[2],
     
@@ -80,11 +80,11 @@ class PersonApi {
 
 class CommentsApi {
     fileprivate static var comments: [Comment] = [
-        Comment(owner: PersonApi.people[2], text: "Nice post"),
-        Comment(owner: PersonApi.people[2], text: "Nice post"),
-        Comment(owner: PersonApi.people[0], text: "Nice post"),
-        Comment(owner: PersonApi.people[1], text: "Nice post"),
-        Comment(owner: PersonApi.people[1], text: "Nice post"),
+        Comment(owner: PersonApi.people[2], respondingId: PersonApi.people[1].id, text: "Nice post"),
+        Comment(owner: PersonApi.people[2], respondingId: PersonApi.people[2].id, text: "Nice post"),
+        Comment(owner: PersonApi.people[0], respondingId: PersonApi.people[0].id, text: "Nice post"),
+        Comment(owner: PersonApi.people[1], respondingId: PersonApi.people[2].id, text: "Nice post"),
+        Comment(owner: PersonApi.people[1], respondingId: PersonApi.people[0].id, text: "Nice post"),
     ]
     
     func getComments() -> [Comment] {

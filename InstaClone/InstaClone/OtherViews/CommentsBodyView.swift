@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CommentsBodyView: View {
-    // var comment: Comment
+    //private var comment: Comment
     var isReply: Bool = false
     var person: Person
  

@@ -10,7 +10,7 @@ import SwiftUI
 struct PersonLikeBarView: View {
     var colWidth: CGFloat
     var person: Person
-    //var comment: Comment
+ //   var comment: Comment
     var body: some View {
         LazyVGrid(columns: [
             GridItem(.fixed(colWidth)),
@@ -25,7 +25,7 @@ struct PersonLikeBarView: View {
                     .padding(.trailing, 10)
                 
 
-                NavigationLink(destination: CommentsView(person: person)) {
+                NavigationLink(destination: CommentsView( person: person)) {
                     Image(systemName: "message")
                         .resizable()
                         .aspectRatio(contentMode: .fit)

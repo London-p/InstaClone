@@ -9,9 +9,10 @@ import SwiftUI
 
 
 @main
-
-
 struct InstaCloneApp: App {
+
+    
+    
     var body: some Scene {
         
         WindowGroup {
@@ -19,19 +20,21 @@ struct InstaCloneApp: App {
             
             ContentView()
                 .environmentObject(Store())
+            
         }
         }
-    }
+}
 
 
 class Store: ObservableObject {
     @Published var following: [Person]
     
-    @Published var comment: [Comment]
+    
     init() {
         following = ApiService.personApi.getFollowing()
-        comment = ApiService.commentsApi.getComments()
+     
         
-        
+    
     }
 }
+
