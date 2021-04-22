@@ -12,6 +12,7 @@ struct MiniAddCommentView: View {
     @State var commentTxt: String = ""
     @State var showSubTextField = false
    // @Binding var clickedOut: Bool
+    @ObservedObject var sot = SourceOfTruth()
     let placeHolder = "Add a comment"
     
     var body: some View {
@@ -30,14 +31,9 @@ struct MiniAddCommentView: View {
                         .foregroundColor(.gray)
             
             
-            Button {
-                
-            } label: {
-                Text("Post")
-                    .foregroundColor(.blue)
-                    .padding(.trailing, 7)
-                    .font(.system(size: 16))
-            } 
+            
+            Button("Send", action: {tapSend()})
+                .padding()
             
                       
             HStack{
@@ -47,5 +43,24 @@ struct MiniAddCommentView: View {
            
                 
         }    }
-}
 
+
+func tapSend() {
+    
+    
+    
+         
+    commentTxt.removeAll()
+    sot.createMessage()
+    sot.getMessages()
+    
+
+
+
+   
+        
+    
+    
+    
+}
+}

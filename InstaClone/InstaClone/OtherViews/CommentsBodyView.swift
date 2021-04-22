@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
-
+import Amplify
+import Combine
 struct CommentsBodyView: View {
     //private var comment: Comment
     var isReply: Bool = false
     var person: Person
- 
+    @ObservedObject var sot = SourceOfTruth()
     @EnvironmentObject var store: Store
     
   /*
@@ -33,11 +34,10 @@ struct CommentsBodyView: View {
                     Image(systemName: "heart")
         }
         }
-        }
         
-        Text("Add Comment")
-            .foregroundColor(.gray)
-            
-    }
-}
+        
+        
 
+}
+}
+}

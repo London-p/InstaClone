@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct NavView: View {
+    @StateObject var vm: FollowingBodyModel = FollowingBodyModel()
+    @ObservedObject var sot = SourceOfTruth()
     
     var colWidth: CGFloat
+   // var message: Message
     
     var body: some View {
         LazyVGrid(columns:[

@@ -11,6 +11,7 @@ struct PersonFooterView: View {
     //@Binding var clickedOut: Bool
     var content: UserContent?
     var person: Person
+    
     var body: some View {
         if let content = content {
             Text("\(content.likeCount) Likes")

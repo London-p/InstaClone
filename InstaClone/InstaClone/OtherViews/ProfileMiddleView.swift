@@ -20,7 +20,7 @@ struct ProfileMiddleView: View {
                 Spacer()
             }
         
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+            Button(action: {print("hello")}, label: {
                 Text("Edit Profile")
                     .frame(width: 312, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .background(Color.gray)
