@@ -62,7 +62,7 @@ class SourceOfTruth: ObservableObject {
                 self.messages = messages
             }
             .store(in: &tokens)
-        
+       // Amplify.DataStore.clear()
 
             }
 }

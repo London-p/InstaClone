@@ -42,8 +42,9 @@ struct MessageView: View {
         }.edgesIgnoringSafeArea(.all)
         
         .padding(.horizontal,20)
-        Spacer()
+        
         }.onAppear(perform: {sot.getMessages()})
+        Spacer()
     }
 
 
