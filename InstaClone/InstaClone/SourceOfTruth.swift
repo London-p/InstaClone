@@ -10,7 +10,8 @@ import Foundation
 import Combine
 class SourceOfTruth: ObservableObject {
     @Published var messages = [Message]()
-    //private var token: AnyCancellable?
+    
+    @Published var messageTxt = ""
     func send(_ message: Message) {
         Amplify.API.mutate(request: .create(message)) { mutationResult in
             switch mutationResult {
@@ -35,8 +36,8 @@ class SourceOfTruth: ObservableObject {
     var token: AnyCancellable?
     func createMessage() {
         let message = Message(
-        name: "Lonndon",
-        description: "hi"
+        name: "London",
+        description: messageTxt
         )
         
        token = Amplify.DataStore.save(message)
@@ -62,6 +63,6 @@ class SourceOfTruth: ObservableObject {
             }
             .store(in: &tokens)
         
-        
-    }
+
+            }
 }

@@ -8,20 +8,22 @@
 import SwiftUI
 
 struct CommentsView: View {
-  //  var comment: Comment
+  
     @ObservedObject var sot = SourceOfTruth()
     @State private var text = String()
     
     var person: Person
+    
     var body: some View {
         
         
         
-        
+        NavigationView {
         VStack{
             Text("Comments")
                 .font(.system(size: 30))
                 .padding(.top, 41)
+            ScrollView {
             CommentsBodyView(person: person)
             
             ForEach(sot.messages) {message in
@@ -39,15 +41,19 @@ struct CommentsView: View {
                 }
                 
             }
+            
             HStack {
-                TextField("Enter message", text: $text)
+                TextField("Enter message", text: $sot.messageTxt)
                 Button("Send", action: {didTapSend()})
                     .padding()
                     
             }.padding(.horizontal,10)
+            }
         }.padding(10).edgesIgnoringSafeArea(.all)
         Spacer()
         
+    }
+        .onAppear(perform: {sot.getMessages()})
     }
     
 
@@ -59,10 +65,10 @@ func didTapSend() {
         
     
          
-    text.removeAll()
+    
     sot.createMessage()
     sot.getMessages()
-    
+    sot.messageTxt.removeAll()
 
 
 

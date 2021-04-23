@@ -14,7 +14,10 @@ struct StoryView: View {
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
-            VStack {
+            
+                NavigationLink(destination: StoryVidView()) {
+
+                VStack {
                 
                     
                         Image(systemName: "person.crop.circle.badge.checkmark")
@@ -23,19 +26,25 @@ struct StoryView: View {
                             .frame(width: 65)
                             .foregroundColor(.gray)
                         Text("  Your Story")
+                            .foregroundColor(.black)
                     }
-                
+                }
             
                 
             ForEach(people, id: \.id) { person in
                 VStack{
+                    NavigationLink(destination: StoryVidView()) {
+                        VStack {
                     Image(person.name)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 100)
                         .clipShape(Circle())
                     Text(person.name)
+                        .foregroundColor(.black)
+                        }
             }
+                }
             }
     }
         }

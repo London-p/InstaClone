@@ -13,6 +13,6 @@ struct UserContent {
     var image: String
     var desc: String
     var owner: Person
-    var likeCount: Int = Int.random(in: 1..<75)
+    var likeCount: Int = Int.random(in: 25..<75)
     var comments: [Comment]?
 }

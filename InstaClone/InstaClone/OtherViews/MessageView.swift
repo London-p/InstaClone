@@ -11,12 +11,11 @@ import Combine
 struct MessageView: View {
     @State private var text = String()
     @ObservedObject var sot = SourceOfTruth()
-    //var message: Message
-    //var messages = [Message]()
-        @ObservedObject private var viewModel = ViewModel()
+    
+        
     
     var body: some View {
-      
+        NavigationView {
         VStack {
             Text("Messages")
                 .font(.system(size: 30))
@@ -27,14 +26,14 @@ struct MessageView: View {
                 LazyVStack {
                     ForEach(sot.messages) {message in
                     
-                          //  Text(messages.description)
+                          
                             Text(message.description!)
                         Text(sot.messages.description)
                     }
                 }
             }
             HStack {
-                TextField("Enter message", text: $text)
+                TextField("Enter message", text: $sot.messageTxt)
                 Button("Send", action: {didTapSend()})
                     .padding()
                     
@@ -44,23 +43,19 @@ struct MessageView: View {
         
         .padding(.horizontal,20)
         Spacer()
+        }.onAppear(perform: {sot.getMessages()})
     }
 
 
 func didTapSend() {
     
-    print(text)
-    let message = Message(
-        name: "London",
-        description: text,
-        time: .now()
-        )
+    
     
          
-    text.removeAll()
+    
     sot.createMessage()
     sot.getMessages()
-    
+    sot.messageTxt.removeAll()
 
 
 
@@ -74,28 +69,5 @@ func didTapSend() {
 }
 
 
-extension MessageView {
-    class ViewModel: ObservableObject {
-        @Published var messages = [Message]()
-        
-        
-        
-        private var tokens: AnyCancellable?
-        func createMessage() {
-            let message = Message(
-            name: "Lonndon",
-            description: "hello",
-            time: nil
-            )
-           tokens = Amplify.DataStore.save(message)
-                .receive(on: DispatchQueue.main)
-                .sink { completion in
-                    print(completion)
-                } receiveValue: { savedMessage in
-                    print("saved")
-                }
-            
-        }
-    }
-}
+
 

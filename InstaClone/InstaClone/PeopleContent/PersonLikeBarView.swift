@@ -11,6 +11,8 @@ struct PersonLikeBarView: View {
     var colWidth: CGFloat
     var person: Person
  //   var comment: Comment
+    var content: UserContent?
+    @Binding var liked: Bool
     var body: some View {
         LazyVGrid(columns: [
             GridItem(.fixed(colWidth)),
@@ -18,14 +20,32 @@ struct PersonLikeBarView: View {
                     GridItem(.fixed(colWidth)),
         ]) {
             HStack {
-                Image(systemName: "heart")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 19)
-                    .padding(.trailing, 10)
+                
+                if liked == false {
+                Button(action: {heartButton()}, label: {
+                    Image(systemName: "heart")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 19)
+                        .padding(.trailing, 10)
+                        .foregroundColor(Color.black)
+                })
+                }
+                if liked == true {
+                    Button(action: {heartButton()}, label: {
+                        Image(systemName: "heart.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 19)
+                            .padding(.trailing, 10)
+                            .foregroundColor(Color.red)
+                           
+                    })
+                }
+                       
                 
 
-                NavigationLink(destination: CommentsView( person: person)) {
+                NavigationLink(destination: CommentsView(person: person)) {
                     Image(systemName: "message")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -55,6 +75,10 @@ struct PersonLikeBarView: View {
     }
     
     
-}
+
     
 
+    func heartButton() {
+        liked.toggle()
+}
+}

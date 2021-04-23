@@ -11,9 +11,9 @@ import Combine
 struct ContentView: View {
     @EnvironmentObject var store: Store
     @StateObject var vm: FollowingBodyModel = FollowingBodyModel()
-    //@ObservedObject var sot = SourceOfTruth()
-   // var message = Message(name: "London", description: "Hello")
-    @StateObject var viewModel = ViewModel()
+    
+   @State private var liked = false
+    
     var body: some View {
         
         GeometryReader{ geometry in
@@ -37,8 +37,8 @@ struct ContentView: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                         
-                                        PersonLikeBarView(colWidth: colWidth, person: person)
-                                        PersonFooterView(content: vm.getContentOfOwners(ownerId: person.id), person: person)
+                                        PersonLikeBarView(colWidth: colWidth, person: person, liked: $liked)
+                                        PersonFooterView(content: vm.getContentOfOwners(ownerId: person.id), person: person, liked: $liked)
                             }
                                 }
                                 .onAppear {
@@ -68,21 +68,30 @@ struct ContentView: View {
                     }
                     NavigationView{
                         VStack {
-                            Text("camera")
+                            Button(action: {print("hello")}, label: {
+                                Text("Upload A Photo")
+                                    .frame(width: 312, height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                    .background(Color.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(128.0)
+                                    .padding(.top, 10)
+                            })
                         }
                     }
                     .tabItem {
                         Image(systemName: "camera")
                     }
                     NavigationView{
-                        VStack{
-                            Text("Notifications")
-                                .font(.system(size: 25))
+                        VStack {
+                        NotificationsView()
+                        
                             Spacer()
+                        }
+                        .navigationBarHidden(true)
                             
                         }
                         .navigationBarHidden(true)
-                    }
+                    
                     .tabItem {
                         Image(systemName: "heart")
                     }
@@ -97,6 +106,7 @@ struct ContentView: View {
                                 
                                 Spacer()
                             }
+                            
                         }
                         .navigationBarHidden(true)
                     }
@@ -110,58 +120,12 @@ struct ContentView: View {
         }
 
 
-extension ContentView {
-    class ViewModel: ObservableObject {
-        @Published var newMessageViewIsVisible = false
-        @Published var messages = [Message]()
-        
-         private var tokens = Set<AnyCancellable>()
-        private var token: AnyCancellable?
-        init() {
-            getMessages()
-            //createMessage()
-        }
-        
-        func getMessages() {
-            Amplify.DataStore.query(Message.self)
-                .receive(on: DispatchQueue.main)
-                .sink { completion in
-                    print(completion)
-                } receiveValue: { messages in
-                    self.messages = messages
-                }
-                .store(in: &tokens)
-        
-            
-            
-        }
-            
-             
-        func createMessage() {
-                let message = Message(
-                name: "Lonndon1",
-                description: "hello",
-                time: nil
-                )
-                
-         token =  Amplify.DataStore.save(message)
-                    .receive(on: DispatchQueue.main)
-                    .sink { completion in
-                        print(completion)
-                    } receiveValue: { savedMessage in
-                        print("saved")
-                    }
-                                    
-            
-            
-    }
-}
-}
-   /*
+
+   
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
         }
     }
 
-*/
+
